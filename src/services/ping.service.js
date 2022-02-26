@@ -22,7 +22,6 @@ export async function sendPing(data) {
 export async function getTopHosts() {
     try {
         const res = await axios({ url: `${BASE_URL}/tophosts`, method: 'GET' })
-        console.log(res.data)
         return res.data
     } catch (error) {
         console.log(error)
