@@ -10,20 +10,37 @@ var axios = Axios.create({
 
 export async function sendPing(data) {
     try {
-        const res = await axios({ url: ` ${BASE_URL}`, method: 'POST', data })
-        console.log(res.data)
+        const res = await axios({ url: ` ${BASE_URL}/ping`, method: 'POST', data })
         return res.data
     } catch (error) {
         console.log(error)
     }
-
 }
 
-export async function getTopHosts() {
+
+export async function getHosts() {
     try {
-        const res = await axios({ url: `${BASE_URL}/tophosts`, method: 'GET' })
+        const res = await axios({ url: `${BASE_URL}/hosts`, method: 'GET' })
         return res.data
     } catch (error) {
         console.log(error)
     }
 }
+
+// export async function addHost(pingReply) {
+//     try {
+//         const res = await axios({ url: `${BASE_URL}/host`, method: 'POST', data: pingReply })
+//         return res.data
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
+// export async function updateHost(pingReply) {
+//     try {
+//         const res = await axios({ url: `${BASE_URL}/host`, method: 'PUT', data: pingReply })
+//         return res.data
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }

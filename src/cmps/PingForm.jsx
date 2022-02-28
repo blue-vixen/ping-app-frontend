@@ -1,17 +1,13 @@
 import React, { useState } from 'react'
-import { sendPing } from '../services/ping.service'
 
-export function PingForm({ handlePingReply }) {
+export function PingForm({ handlePing, isPingReqRunning }) {
     const [pingSettings, setPingSettings] = useState({ host: '', count: 1 })
     const { host, count } = pingSettings
 
-
     const handleSubmit = async ev => {
         ev.preventDefault()
-        const res = await sendPing({ ...pingSettings })
-        handlePingReply(res)
+        handlePing({ ...pingSettings })
     }
-
 
     const handleChange = ev => {
         const { name, value } = ev.target
@@ -19,7 +15,7 @@ export function PingForm({ handlePingReply }) {
     }
 
     return (
-        <div>
+        <div className='form-container'>
             <form className='ping-form' onSubmit={handleSubmit}>
                 <div className='input-container'>
                     <label htmlFor="host">Host:</label>
@@ -30,7 +26,7 @@ export function PingForm({ handlePingReply }) {
                     <input type='range' name='count' id='count' value={count} min='1' max='5' required onChange={handleChange} />
                     <span>{count}</span>
                 </div>
-                <button type='submit'>Run</button>
+                <button type='submit' disabled={isPingReqRunning ? true : false}>{isPingReqRunning ? 'Running' : 'Run'}</button>
             </form>
         </div>
     )
